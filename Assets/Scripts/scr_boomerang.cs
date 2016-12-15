@@ -32,6 +32,7 @@ public class scr_boomerang : MonoBehaviour {
 
 	// Should the boomerang be returning to the player of origin?
 	bool returnToPlayer = false;
+	public static bool gameOver = false;
 
 	IEnumerator throwRoutine(){
 
@@ -102,8 +103,10 @@ public class scr_boomerang : MonoBehaviour {
 		// Destroys players that didn't throw this boomerang.
 		if (collision.gameObject != player && collision.tag == "Player") {
 			Destroy (collision.gameObject);
+			gameOver = true;
 			audio.clip = crash;
 			audio.Play ();
+		
 		}
 
 		// Destroys the boomerang if returned to player.
