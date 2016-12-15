@@ -22,6 +22,13 @@ public class scr_player : MonoBehaviour {
 	public KeyCode myMoveLeft;
 	public KeyCode myMoveRight;
 
+	AudioSource audio;
+
+	public AudioClip retrieve;
+
+
+
+
 	// Checks to see if boomerang is already thrown so the player doesn't have multiple projectiles out.
 	public bool boomerangThrown = false;
 
@@ -44,7 +51,7 @@ public class scr_player : MonoBehaviour {
 	float chargeTimer = 0f;
 
 	void Start () {
-		
+		audio = GetComponent <AudioSource> ();
 		// Set up initial movement speed.
 		moveSpeed = baseMoveSpeed;
 
@@ -110,9 +117,15 @@ public class scr_player : MonoBehaviour {
 		if (Input.GetKey (myMoveRight) || Input.GetKey (myMoveLeft) || Input.GetKey (myMoveUp) || Input.GetKey (myMoveDown)) {
 			faceDirection (inputX, inputY);
 			rb.velocity = transform.forward * -1f * moveSpeed; // Admittedly the * -1f is a hack.
+		
+
 		} else {
 			rb.velocity = Vector3.zero;
+
 		}
+
+
+
 
 	}
 		
