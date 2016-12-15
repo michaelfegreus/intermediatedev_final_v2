@@ -35,7 +35,7 @@ public class scr_player : MonoBehaviour {
 	float throwStrength = 30f;
 
 	// Current charge value.
-	float charge;
+	float charge=1f;
 
 	// Multiplyer for charged boomerang velocity.
 	float chargeMultiplier = 2f;
