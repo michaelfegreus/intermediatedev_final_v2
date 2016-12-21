@@ -27,8 +27,6 @@ public class scr_player : MonoBehaviour {
 	public AudioClip retrieve;
 
 
-
-
 	// Checks to see if boomerang is already thrown so the player doesn't have multiple projectiles out.
 	public bool boomerangThrown = false;
 

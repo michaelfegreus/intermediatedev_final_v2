@@ -29,6 +29,12 @@ public class scr_boomerang : MonoBehaviour {
 	public AudioClip release;
 	public AudioClip back;
 
+	//particle effect for when the player is hit
+	public ParticleSystem PlayerHitParticles;
+	//screnshake activator
+	//public bool startShake;
+
+
 
 	// Should the boomerang be returning to the player of origin?
 	bool returnToPlayer = false;
@@ -77,7 +83,6 @@ public class scr_boomerang : MonoBehaviour {
 		returnSpeed = throwSpeed / 300;
 
 		audio = GetComponent <AudioSource> ();
-
 	
 		audio.clip = release;
 		audio.Play ();
@@ -102,6 +107,14 @@ public class scr_boomerang : MonoBehaviour {
 
 		// Destroys players that didn't throw this boomerang.
 		if (collision.gameObject != player && collision.tag == "Player") {
+			//starts coroutine for screenshake and then instantiates particle effects when the player gets hit
+			//StartCoroutine (ScreenShakeCoroutine ());
+
+			//startShake = true;
+			//Invoke ("stopShake", 1f);
+			Instantiate (PlayerHitParticles, transform.position, Quaternion.identity);
+
+			//game over state
 			Destroy (collision.gameObject);
 			gameOver = true;
 			audio.clip = crash;
@@ -130,5 +143,33 @@ public class scr_boomerang : MonoBehaviour {
 				Destroy (collision.gameObject);
 			}
 		}*/
+
 	}
+
+	//void stopShake(){
+		//startShake = false;
+	//}
+
+	/*IEnumerator ScreenShakeCoroutine() {
+
+		while (true) {
+			SStimer++;
+			cameraObj.gameObject.GetComponent<scr_screenShake> ().startShake = true;
+			Debug.Log ("ScreenShaking");
+
+			if (SStimer > 60f) {
+
+				Debug.Log ("Breaking out of loop...");
+				cameraObj.gameObject.GetComponent<scr_screenShake> ().startShake = false;
+				break; 
+
+			}
+
+			yield return 0;
+
+		}
+
+	}*/
+
+
 }

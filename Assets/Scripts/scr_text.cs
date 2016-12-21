@@ -26,6 +26,7 @@ public class scr_text : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown (KeyCode.G)) {
+
 			SceneManager.LoadScene (1);
 		}
 
