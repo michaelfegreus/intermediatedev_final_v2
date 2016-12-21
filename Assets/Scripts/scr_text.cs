@@ -22,6 +22,7 @@ public class scr_text : MonoBehaviour {
 			Debug.Log ("end");
 			victoryText.text = "Victory!";
 			restartText.text = "Press G to play again.";
+			scr_boomerang.gameOver = false;
 		}
 
 		if (Input.GetKeyDown (KeyCode.G)) {
