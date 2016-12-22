@@ -100,6 +100,7 @@ public class scr_boomerang : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
 
 		if(returnToPlayer == false){
 			rb.velocity = transform.forward *  -1f * currentThrowSpeed;// The *-1f is a really hacky solution.
