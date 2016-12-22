@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.G)){
-			SceneManager.LoadScene ("sc_game_scene");
+			SceneManager.LoadScene ("poeticLandscape");
 		}
 	
 	}

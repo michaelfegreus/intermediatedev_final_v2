@@ -3,13 +3,13 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class ChargingBar : MonoBehaviour {
-	Image barimage;
+	public Image barimage;
 	public Sprite bar;
 
 	// Use this for initialization
 	void Start () {
-		barimage.sprite = bar;
-		barimage.type = Image.Type.Filled;
+//		barimage.sprite = bar;
+//		barimage.type = Image.Type.Filled;
 		barimage.fillAmount = .5f;
 	
 
@@ -17,8 +17,7 @@ public class ChargingBar : MonoBehaviour {
 
 	
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 	
 	}
