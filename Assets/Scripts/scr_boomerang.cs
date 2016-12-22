@@ -31,50 +31,23 @@ public class scr_boomerang : MonoBehaviour {
 	public AudioClip release;
 	public AudioClip back;
 
+	//particle effect for when the player is hit
+	public ParticleSystem PlayerHitParticles;
+	//screnshake activator
+	//public bool startShake;
+
+
 
 	// Should the boomerang be returning to the player of origin?
 	bool returnToPlayer = false;
 	public static bool gameOver = false;
 
-//	IEnumerator throwRoutine(){
-//
-//		//Begin slowing after 3/5 of the duration
-//		yield return new WaitForSeconds(throwLength * .6f);
-//		//Gradual slow to stop.
-//		currentThrowSpeed /= 2f;
-//
-//		//Slow to the stop at the remainder 1/5 of the timer on throwLength.
-//		yield return new WaitForSeconds (throwLength * .2f);
-//		currentThrowSpeed = 0f;
-//
-//		//Pause at the end of throw.
-//		yield return new WaitForSeconds (throwLength * .2f);
-//
-//		// Wait before returning
-//		yield return new WaitForSeconds (throwLength * .4f);
-//		returnToPlayer = true;
-//		audio.clip = back;
-//		audio.Play ();
-//		// Begin speeding up for return.
-//		currentThrowSpeed = returnSpeed / 4;
-//
-//		yield return new WaitForSeconds (throwLength * .2f);
-//		returnToPlayer = true;
-//		// Full speed return.
-//		currentThrowSpeed = returnSpeed;
-//	
-//
-//		//yield return StartCoroutine (flashRed());
-//	}
-
 	IEnumerator throwRoutine(){
 
-		//begin pulling backto player
+		//Begin slowing after 3/5 of the duration
 		yield return new WaitForSeconds(throwLength * .6f);
-
-		rb.AddForce (directiontoplayer.normalized * 500);
-
-	
+		//Gradual slow to stop.
+		currentThrowSpeed /= 2f;
 
 		//Slow to the stop at the remainder 1/5 of the timer on throwLength.
 		yield return new WaitForSeconds (throwLength * .2f);
@@ -85,20 +58,21 @@ public class scr_boomerang : MonoBehaviour {
 
 		// Wait before returning
 		yield return new WaitForSeconds (throwLength * .4f);
-	
+		returnToPlayer = true;
 		audio.clip = back;
 		audio.Play ();
 		// Begin speeding up for return.
 		currentThrowSpeed = returnSpeed / 4;
 
 		yield return new WaitForSeconds (throwLength * .2f);
-	
+		returnToPlayer = true;
 		// Full speed return.
 		currentThrowSpeed = returnSpeed;
-
+	
 
 		//yield return StartCoroutine (flashRed());
 	}
+
 
 	// Use this for initialization
 	void Start () {
@@ -114,7 +88,6 @@ public class scr_boomerang : MonoBehaviour {
 		returnSpeed = throwSpeed / 300;
 
 		audio = GetComponent <AudioSource> ();
-
 	
 		audio.clip = release;
 		audio.Play ();
@@ -139,6 +112,14 @@ public class scr_boomerang : MonoBehaviour {
 
 		// Destroys players that didn't throw this boomerang.
 		if (collision.gameObject != player && collision.tag == "Player") {
+			//starts coroutine for screenshake and then instantiates particle effects when the player gets hit
+			//StartCoroutine (ScreenShakeCoroutine ());
+
+			//startShake = true;
+			//Invoke ("stopShake", 1f);
+			Instantiate (PlayerHitParticles, transform.position, Quaternion.identity);
+
+			//game over state
 			Destroy (collision.gameObject);
 			gameOver = true;
 			audio.clip = crash;
@@ -167,5 +148,33 @@ public class scr_boomerang : MonoBehaviour {
 				Destroy (collision.gameObject);
 			}
 		}*/
+
 	}
+
+	//void stopShake(){
+		//startShake = false;
+	//}
+
+	/*IEnumerator ScreenShakeCoroutine() {
+
+		while (true) {
+			SStimer++;
+			cameraObj.gameObject.GetComponent<scr_screenShake> ().startShake = true;
+			Debug.Log ("ScreenShaking");
+
+			if (SStimer > 60f) {
+
+				Debug.Log ("Breaking out of loop...");
+				cameraObj.gameObject.GetComponent<scr_screenShake> ().startShake = false;
+				break; 
+
+			}
+
+			yield return 0;
+
+		}
+
+	}*/
+
+
 }
