@@ -23,6 +23,8 @@ public class scr_boomerang : MonoBehaviour {
 	// How fast the return translation should be.
 	float returnSpeed;
 
+	Vector3 directiontoplayer;
+
 	AudioSource audio;
 
 	public AudioClip crash;
@@ -34,12 +36,45 @@ public class scr_boomerang : MonoBehaviour {
 	bool returnToPlayer = false;
 	public static bool gameOver = false;
 
+//	IEnumerator throwRoutine(){
+//
+//		//Begin slowing after 3/5 of the duration
+//		yield return new WaitForSeconds(throwLength * .6f);
+//		//Gradual slow to stop.
+//		currentThrowSpeed /= 2f;
+//
+//		//Slow to the stop at the remainder 1/5 of the timer on throwLength.
+//		yield return new WaitForSeconds (throwLength * .2f);
+//		currentThrowSpeed = 0f;
+//
+//		//Pause at the end of throw.
+//		yield return new WaitForSeconds (throwLength * .2f);
+//
+//		// Wait before returning
+//		yield return new WaitForSeconds (throwLength * .4f);
+//		returnToPlayer = true;
+//		audio.clip = back;
+//		audio.Play ();
+//		// Begin speeding up for return.
+//		currentThrowSpeed = returnSpeed / 4;
+//
+//		yield return new WaitForSeconds (throwLength * .2f);
+//		returnToPlayer = true;
+//		// Full speed return.
+//		currentThrowSpeed = returnSpeed;
+//	
+//
+//		//yield return StartCoroutine (flashRed());
+//	}
+
 	IEnumerator throwRoutine(){
 
-		//Begin slowing after 3/5 of the duration
+		//begin pulling backto player
 		yield return new WaitForSeconds(throwLength * .6f);
-		//Gradual slow to stop.
-		currentThrowSpeed /= 2f;
+
+		rb.AddForce (directiontoplayer.normalized * 500);
+
+	
 
 		//Slow to the stop at the remainder 1/5 of the timer on throwLength.
 		yield return new WaitForSeconds (throwLength * .2f);
@@ -50,23 +85,25 @@ public class scr_boomerang : MonoBehaviour {
 
 		// Wait before returning
 		yield return new WaitForSeconds (throwLength * .4f);
-		returnToPlayer = true;
+	
 		audio.clip = back;
 		audio.Play ();
 		// Begin speeding up for return.
 		currentThrowSpeed = returnSpeed / 4;
 
 		yield return new WaitForSeconds (throwLength * .2f);
-		returnToPlayer = true;
+	
 		// Full speed return.
 		currentThrowSpeed = returnSpeed;
-	
+
 
 		//yield return StartCoroutine (flashRed());
 	}
 
 	// Use this for initialization
 	void Start () {
+
+		directiontoplayer = new Vector3 (transform.position.x - player.transform.position.x, 0, transform.position.z - player.transform.position.z);
 		rb = GetComponent<Rigidbody>();
 
 		// What direction the boomerang faces and will move in.
