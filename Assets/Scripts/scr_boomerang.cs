@@ -23,6 +23,8 @@ public class scr_boomerang : MonoBehaviour {
 	// How fast the return translation should be.
 	float returnSpeed;
 
+	Vector3 directiontoplayer;
+
 	AudioSource audio;
 
 	public AudioClip crash;
@@ -71,8 +73,11 @@ public class scr_boomerang : MonoBehaviour {
 		//yield return StartCoroutine (flashRed());
 	}
 
+
 	// Use this for initialization
 	void Start () {
+
+		directiontoplayer = new Vector3 (transform.position.x - player.transform.position.x, 0, transform.position.z - player.transform.position.z);
 		rb = GetComponent<Rigidbody>();
 
 		// What direction the boomerang faces and will move in.
